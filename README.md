@@ -1,4 +1,6 @@
 # HLFix #
+Master: [![Build Status](https://travis-ci.org/kriswema/hlfix.png?branch=master)](https://travis-ci.org/kriswema/hlfix)
+
 Develop: [![Build Status](https://travis-ci.org/kriswema/hlfix.png?branch=develop)](https://travis-ci.org/kriswema/hlfix)
 
 ## Credits ##
