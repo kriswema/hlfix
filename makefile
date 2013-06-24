@@ -4,7 +4,7 @@ OBJECTS = main.o geo.o rmf.o cd.o map.o
 GCC = g++
 
 $(PROGNAME).exe: $(OBJECTS)
-	$(GCC) -o $(PROGNAME).exe $(OBJECTS)
+	$(GCC) -o $(PROGNAME) $(OBJECTS)
 
 {$S}.cpp{$O}.o:
 	$(GCC) -c -o $@ $<
