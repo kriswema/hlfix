@@ -14,3 +14,6 @@ rmf.o: rmf.h geo.h
 geo.o: geo.h rmf.h
 cd.o: rmf.h geo.h
 map.o: geo.h
+
+clean:
+	@rm -fRv $(OBJECTS)
