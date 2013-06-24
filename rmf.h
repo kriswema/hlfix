@@ -30,144 +30,144 @@ extern int RMFPosCorner;
 
 class RMFException
 {
-	public:
-	char *msg;
-	RMFException(char *toMsg) {msg = toMsg;}
+  public:
+  char *msg;
+  RMFException(char *toMsg) {msg = toMsg;}
 };
 
 class RMFColor
 {
-	public:
-	unsigned char r, g, b;
+  public:
+  unsigned char r, g, b;
 };
 
 class RMFVector
 {
-	public:
-	float x, y, z;
+  public:
+  float x, y, z;
 };
 
 class RMFFace
 {
-	public:
-	char texture[256];
-	RMFVector uaxis, vaxis;
-	float ushift, vshift, uscale, vscale, rot;
-	int nverts;
-	list<list<RMFVector>::iterator> verts;
-	vector<list<RMFVector>::iterator> planeverts;
+  public:
+  char texture[256];
+  RMFVector uaxis, vaxis;
+  float ushift, vshift, uscale, vscale, rot;
+  int nverts;
+  list<list<RMFVector>::iterator> verts;
+  vector<list<RMFVector>::iterator> planeverts;
 };
 
 class RMFKey
 {
-	public:
-	char name[32];
-	char value[100];
+  public:
+  char name[32];
+  char value[100];
 };
 
 class RMFObject
 {
-	public:
-	int visgroup;
-	RMFColor color;
+  public:
+  int visgroup;
+  RMFColor color;
 };
 
 class RMFSolid : public RMFObject
 {
-	public:
-	int nfaces;
-	list<list<RMFFace>::iterator> faces;
+  public:
+  int nfaces;
+  list<list<RMFFace>::iterator> faces;
 };
 
 class RMFEntityDef
 {
-	public:
-	char classname[128];
-	int flags;
-	int nkeys;
-	list<RMFKey> keys;
+  public:
+  char classname[128];
+  int flags;
+  int nkeys;
+  list<RMFKey> keys;
 };
 
 class RMFEntity : public RMFObject
 {
-	public:
-	int nsolids;
-	list<list<RMFSolid>::iterator> solids;
-	RMFVector location;
-	RMFEntityDef def;
+  public:
+  int nsolids;
+  list<list<RMFSolid>::iterator> solids;
+  RMFVector location;
+  RMFEntityDef def;
 };
 
 class RMFGroup : public RMFObject
 {
-	public:
-	int nentities;
-	list<list<RMFEntity>::iterator> entities;
-	int nsolids;
-	list<list<RMFSolid>::iterator> solids;
-	int ngroups;
-	list<RMFGroup> groups;
+  public:
+  int nentities;
+  list<list<RMFEntity>::iterator> entities;
+  int nsolids;
+  list<list<RMFSolid>::iterator> solids;
+  int ngroups;
+  list<RMFGroup> groups;
 };
 
 class RMFVisGroup
 {
-	public:
-	char name[128];
-	RMFColor color;
-	int visible;
+  public:
+  char name[128];
+  RMFColor color;
+  int visible;
 };
 
 class RMFCorner
 {
-	public:
-	RMFVector location;
-	int index;
-	char name[128];
-	int nkeys;
-	list<RMFKey> keys;
+  public:
+  RMFVector location;
+  int index;
+  char name[128];
+  int nkeys;
+  list<RMFKey> keys;
 };
 
 enum
 {
-	RMFPathType_OneWay = 0,
-	RMFPathType_Circular = 1,
-	RMFPathType_PingPong = 2
+  RMFPathType_OneWay = 0,
+  RMFPathType_Circular = 1,
+  RMFPathType_PingPong = 2
 };
 
 class RMFPath
 {
-	public:
-	char name[128];
-	char classname[128];
-	int type;
-	int ncorners;
-	list<RMFCorner> corners;
+  public:
+  char name[128];
+  char classname[128];
+  int type;
+  int ncorners;
+  list<RMFCorner> corners;
 };
 
 class RMFMap : public RMFGroup
 {
-	public:
-	int nvisgroups;
-	list<RMFVisGroup> visgroups;
+  public:
+  int nvisgroups;
+  list<RMFVisGroup> visgroups;
 
-	int nverts;
-	list<RMFVector> verts;
+  int nverts;
+  list<RMFVector> verts;
 
-	int nfaces;
-	list<RMFFace> faces;
+  int nfaces;
+  list<RMFFace> faces;
 
-	int nsolids;
-	list<RMFSolid> solids;
-	
-	int nentities;
-	list<RMFEntity> entities;
+  int nsolids;
+  list<RMFSolid> solids;
 
-	int npaths;
-	list<RMFPath> paths;
-	
-	int nguides;
-	list<RMFVector> guides;
-	
-	list<RMFEntity>::iterator worldspawn;
+  int nentities;
+  list<RMFEntity> entities;
+
+  int npaths;
+  list<RMFPath> paths;
+
+  int nguides;
+  list<RMFVector> guides;
+
+  list<RMFEntity>::iterator worldspawn;
 };
 
 void RMFReadMap(FILE *f, RMFMap *map);
