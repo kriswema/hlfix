@@ -148,10 +148,10 @@ int main(int argc, char **argv)
   GeoMap map;
   float efactor = 1;
   int i, flagWriteRMF, flagWAD, flagTesselate, flagDecompose, flagUnite, flagVisibleOnly;
-  char wadfn[_MAX_PATH+1];
-  char outfn[_MAX_PATH+1];
-  char rmffn[_MAX_PATH+1];
-  char option[_MAX_PATH+1];
+  char wadfn[FILENAME_MAX+1];
+  char outfn[FILENAME_MAX+1];
+  char rmffn[FILENAME_MAX+1];
+  char option[FILENAME_MAX+1];
 
   wadfn[0] = outfn[0] = rmffn[0] = '\0';
   FlagGeoDebug = FlagRMFDebug = flagWriteRMF = flagWAD = flagVisibleOnly = 0;
@@ -317,7 +317,7 @@ int main(int argc, char **argv)
       return 1;
     }
 
-    while (fgets(wadfn,_MAX_PATH+1,fwad) != NULL)
+    while (fgets(wadfn,FILENAME_MAX+1,fwad) != NULL)
     {
       Chop(wadfn);
       map.wads.push_back(string(wadfn));
