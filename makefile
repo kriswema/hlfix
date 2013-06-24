@@ -1,3 +1,4 @@
+BINARIES_DIR = bin/
 PROGNAME = hlfix
 OBJECTS = main.o geo.o rmf.o cd.o map.o
 
@@ -13,6 +14,13 @@ cd.o: rmf.h geo.h
 map.o: geo.h
 
 all: $(OBJECTS)
-	$(GCC) -o $(PROGNAME) $(OBJECTS)
+	@mkdir -p $(BINARIES_DIR)
+	$(GCC) -o $(BINARIES_DIR)/$(PROGNAME) $(OBJECTS)
+	@make clean
+
 clean:
 	@rm -fRv $(OBJECTS)
+
+purge:
+	@make clean
+	@rm -fRv $(BINARIES_DIR)
