@@ -1,4 +1,5 @@
 BINARIES_DIR = bin/
+GLOBAL_BINARIES_DIR = /usr/bin/
 PROGNAME = hlfix
 OBJECTS = main.o geo.o rmf.o cd.o map.o
 
@@ -24,3 +25,6 @@ clean:
 purge:
 	@make clean
 	@rm -fRv $(BINARIES_DIR)
+
+install:
+	mv $(BINARIES_DIR)* $(GLOBAL_BINARIES_DIR)
