@@ -15,7 +15,7 @@ map.o: geo.h
 
 all: $(OBJECTS)
 	@mkdir -p $(BINARIES_DIR)
-	$(GCC) -o $(BINARIES_DIR)/$(PROGNAME) $(OBJECTS)
+	$(GCC) -o $(BINARIES_DIR)$(PROGNAME) $(OBJECTS)
 	@make clean
 
 clean:
