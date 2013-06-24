@@ -12,6 +12,7 @@
 #ifndef _INC_GEO
 #define _INC_GEO
 
+#include <cstdio>
 #include <cmath>
 #include <list>
 #include <cfloat>
