@@ -48,8 +48,8 @@ void GeoMap::MAPWriteFace(FILE *f, GeoFace *face)
     uscale = face->tex.uscale;
     vscale = face->tex.vscale;
 
-    if (!fequal((face->tex.vaxis % face->tex.uaxis) * face->norm(),1)) throw new GeoException("texture coordinates not supported with this MAP version");
-    if (int(face->tex.ushift) % 16 != 0 || int(face->tex.vshift) % 16 != 0) throw new GeoException("texture coordinates not supported with this MAP version");
+    if (!fequal((face->tex.vaxis % face->tex.uaxis) * face->norm(),1)) throw new GeoException((char *)"texture coordinates not supported with this MAP version");
+    if (int(face->tex.ushift) % 16 != 0 || int(face->tex.vshift) % 16 != 0) throw new GeoException((char *)"texture coordinates not supported with this MAP version");
 
     if (uscale < 0)
     {

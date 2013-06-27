@@ -347,7 +347,7 @@ void TesselateNonPlanarFace(list<GeoFace> *faces, list<GeoFace>::iterator iface,
         ie1 = iface->edges.begin();
 
       if (ie1 == ieFirst)
-        throw new GeoException("Could not tesselate non-planar face");
+        throw new GeoException((char *)"Could not tesselate non-planar face");
 
       if (rfaces != NULL && ++ier1 == irface->edges.rend())
         ier1 = irface->edges.rbegin();

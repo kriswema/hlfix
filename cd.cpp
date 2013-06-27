@@ -75,7 +75,7 @@ void GenerateCutEdges(GeoFace &face, GeoPlane &cutplane, list<GeoEdge> *frontEdg
 
       while (ie->isIn(cutplane))
         if (++ie == face.edges.end())
-          throw new GeoException("Attempt to cut outer edge cycle which lies entirely within cutting plane");
+          throw new GeoException((char *)"Attempt to cut outer edge cycle which lies entirely within cutting plane");
 
       GeoDebugPrintf("      Starting at edge %i of outer cycle\n",ie->index);
     }
@@ -86,7 +86,7 @@ void GenerateCutEdges(GeoFace &face, GeoPlane &cutplane, list<GeoEdge> *frontEdg
 
       while (ie->isIn(cutplane))
         if (++ie == ile->end())
-          throw new GeoException("Attempt to cut inner edge cycle which lies entirely within cutting plane");
+          throw new GeoException((char *)"Attempt to cut inner edge cycle which lies entirely within cutting plane");
 
       GeoDebugPrintf("      Starting at edge %i of an inner cycle\n",ie->index);
     }
@@ -167,7 +167,7 @@ void GenerateCutEdges(GeoFace &face, GeoPlane &cutplane, list<GeoEdge> *frontEdg
 
   GeoDebugPrintf("\n      Generating edges for %i front intersection points\n", frontVerts.size());
 
-  if (frontVerts.size() & 1) throw new GeoException("Odd number of front intersection points");
+  if (frontVerts.size() & 1) throw new GeoException((char *)"Odd number of front intersection points");
 
   for (vi = frontVerts.begin(); vi != frontVerts.end();)
   {
@@ -191,7 +191,7 @@ void GenerateCutEdges(GeoFace &face, GeoPlane &cutplane, list<GeoEdge> *frontEdg
 
   GeoDebugPrintf("\n      Generating edges for %i back intersection points\n", backVerts.size());
 
-  if (backVerts.size() & 1) throw new GeoException("Odd number of back intersection points");
+  if (backVerts.size() & 1) throw new GeoException((char *)"Odd number of back intersection points");
 
   for (vi = backVerts.begin(); vi != backVerts.end();)
   {
@@ -252,7 +252,7 @@ void FindAdjacentEdges(list<GeoEdge> *edges, list<GeoEdge>::iterator ieStart, li
     }
 
     if (aAdjacent == 999.0)
-      throw new GeoException("Attempt to assemble incomplete edge cycle");
+      throw new GeoException((char *)"Attempt to assemble incomplete edge cycle");
 
     edge = *ieAdjacent;
     edges->erase(ieAdjacent);
@@ -350,7 +350,7 @@ void FindNestingStructure(list<GeoFace> *faces, const GeoVector &norm)
       }
 
       if (jface == faces->end())
-        throw new GeoException("Inner edge cycle generated with no containing outer cycle");
+        throw new GeoException((char *)"Inner edge cycle generated with no containing outer cycle");
 
       faces->erase(iface++);
     }
@@ -528,7 +528,7 @@ void GenerateSolids(list<GeoFace> *faces, list<GeoSolid> *solids, GeoColor color
         }
 
         if (!found)
-          throw new GeoException("Orphaned face %i [%s] with normal (%g %g %g)",iface->index,iface->tex.texture,iface->norm().x,iface->norm().y,iface->norm().z);
+          throw new GeoException((char *)"Orphaned face %i [%s] with normal (%g %g %g)",iface->index,iface->tex.texture,iface->norm().x,iface->norm().y,iface->norm().z);
       }
     }
 
@@ -628,7 +628,7 @@ int ReflexEdges(GeoSolid &solid, list<GeoFace>::iterator iface)
   foreach (ie, iface->edges)
   {
     if (!FindAdjacentFace(&solid.faces, iface, ie, &jface, &je))
-      throw new GeoException("Incomplete solid");
+      throw new GeoException((char *)"Incomplete solid");
 
     nj = jface->norm();
 
@@ -649,7 +649,7 @@ int ReflexEdges(GeoSolid &solid, list<GeoFace>::iterator iface)
     foreach (ie, *ile)
     {
       if (!FindAdjacentFace(&solid.faces, iface, ie, &jface, &je))
-        throw new GeoException("Incomplete solid");
+        throw new GeoException((char *)"Incomplete solid");
 
       nj = jface->norm();
 

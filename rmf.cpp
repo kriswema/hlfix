@@ -33,11 +33,11 @@ void GeoMap::RMFReadNString(FILE *f, char *str, int maxlen)
 {
   unsigned char len;
 
-  if (fread(&len,1,1,f) != 1) throw new GeoException("Premature EOF reading NString length");
-  if (len > maxlen) throw new GeoException("NString too long");
-  if (len == 0) throw new GeoException("Zero length NString");
-  if (fread(str,len,1,f) != 1) throw new GeoException("Premature EOF reading NString");
-  if (str[len-1] != '\0') throw new GeoException("Unterminated NString");
+  if (fread(&len,1,1,f) != 1) throw new GeoException((char *)"Premature EOF reading NString length");
+  if (len > maxlen) throw new GeoException((char *)"NString too long");
+  if (len == 0) throw new GeoException((char *)"Zero length NString");
+  if (fread(str,len,1,f) != 1) throw new GeoException((char *)"Premature EOF reading NString");
+  if (str[len-1] != '\0') throw new GeoException((char *)"Unterminated NString");
   RMFPos += len+1;
 
   //RMFDebugPrintf("NString: %s\n",str);
@@ -45,7 +45,7 @@ void GeoMap::RMFReadNString(FILE *f, char *str, int maxlen)
 
 void GeoMap::RMFReadString(FILE *f, char *str, int len)
 {
-  if (fread(str,len,1,f) != 1) throw new GeoException("Preature EOF reading String");
+  if (fread(str,len,1,f) != 1) throw new GeoException((char *)"Preature EOF reading String");
   RMFPos += len;
 
   //RMFDebugPrintf("String: %s\n",str);
@@ -53,7 +53,7 @@ void GeoMap::RMFReadString(FILE *f, char *str, int len)
 
 void GeoMap::RMFReadColor(FILE *f, GeoColor *color)
 {
-  if (fread(color,3,1,f) != 1) throw new GeoException("Premature EOF reading Color");
+  if (fread(color,3,1,f) != 1) throw new GeoException((char *)"Premature EOF reading Color");
   RMFPos += 3;
 
   //RMFDebugPrintf("Color: %i %i %i\n",(int)color->r,(int)color->g,(int)color->b);
@@ -63,11 +63,11 @@ void GeoMap::RMFReadVector(FILE *f, GeoVector *vector)
 {
   float x, y, z;
 
-  if (fread(&x,4,1,f) != 1) throw new GeoException("Premature EOF reading Vector");
+  if (fread(&x,4,1,f) != 1) throw new GeoException((char *)"Premature EOF reading Vector");
   RMFPos += 4;
-  if (fread(&y,4,1,f) != 1) throw new GeoException("Premature EOF reading Vector");
+  if (fread(&y,4,1,f) != 1) throw new GeoException((char *)"Premature EOF reading Vector");
   RMFPos += 4;
-  if  (fread(&z,4,1,f) != 1) throw new GeoException("Premature EOF reading Vector");
+  if  (fread(&z,4,1,f) != 1) throw new GeoException((char *)"Premature EOF reading Vector");
   RMFPos += 4;
 
   vector->x = x;
@@ -79,7 +79,7 @@ void GeoMap::RMFReadVector(FILE *f, GeoVector *vector)
 
 void GeoMap::RMFReadInt(FILE *f, int *i)
 {
-  if (fread(i,4,1,f) != 1) throw new GeoException("Premature EOF reading int");
+  if (fread(i,4,1,f) != 1) throw new GeoException((char *)"Premature EOF reading int");
   RMFPos += 4;
 
   //RMFDebugPrintf("Int: %i\n",*i);
@@ -87,7 +87,7 @@ void GeoMap::RMFReadInt(FILE *f, int *i)
 
 void GeoMap::RMFReadFloat(FILE *f, float *n)
 {
-  if (fread(n,4,1,f) != 1) throw new GeoException("Premature EOF reading float");
+  if (fread(n,4,1,f) != 1) throw new GeoException((char *)"Premature EOF reading float");
   RMFPos += 4;
 
   //RMFDebugPrintf("Float: %g\n",*n);
@@ -95,7 +95,7 @@ void GeoMap::RMFReadFloat(FILE *f, float *n)
 
 void GeoMap::RMFReadByte(FILE *f, unsigned char *b)
 {
-  if (fread(b,1,1,f) != 1) throw new GeoException("Premature EOF reading byte");
+  if (fread(b,1,1,f) != 1) throw new GeoException((char *)"Premature EOF reading byte");
   RMFPos++;
 
   //RMFDebugPrintf("Byte: %i\n",*b);
@@ -103,7 +103,7 @@ void GeoMap::RMFReadByte(FILE *f, unsigned char *b)
 
 void GeoMap::RMFSkip(FILE *f, int d)
 {
-  if (fseek(f,d,SEEK_CUR) != 0) throw new GeoException("Premature EOF during seek");
+  if (fseek(f,d,SEEK_CUR) != 0) throw new GeoException((char *)"Premature EOF during seek");
   RMFPos += d;
 
   //RMFDebugPrintf("Skip: %i\n",d);
@@ -245,7 +245,7 @@ void GeoMap::RMFReadEntity(FILE *f, GeoEntity *entity)
     RMFPosSolid = i;
 
     RMFReadNString(f,buf,50);
-    if (strcmp(buf,"CMapSolid") != 0) throw new GeoException("Expected CMapSolid");
+    if (strcmp(buf,"CMapSolid") != 0) throw new GeoException((char *)"Expected CMapSolid");
 
     RMFDebugPrintf("Solid %i:\n",i);
 
@@ -313,7 +313,7 @@ void GeoMap::RMFReadGroup(FILE *f, GeoGroup *group)
       group->groups.push_back(g);
     }
     else
-      throw new GeoException("Invalid world object encountered (expected CMapSolid, CMapEntity or CMapGroup");
+      throw new GeoException((char *)"Invalid world object encountered (expected CMapSolid, CMapEntity or CMapGroup");
   }
 }
 
@@ -400,7 +400,7 @@ void GeoMap::RMFRead(FILE *f)
 
   RMFSkip(f,4);
   RMFReadString(f,buf,3);
-  if (strncmp(buf,"RMF",3) != 0) throw new GeoException("Invalid header");
+  if (strncmp(buf,"RMF",3) != 0) throw new GeoException((char *)"Invalid header");
   RMFReadInt(f,&nvisgroups);
 
   visgroups.clear();
@@ -415,13 +415,13 @@ void GeoMap::RMFRead(FILE *f)
   RMFPosVisGroup = -1;
 
   RMFReadNString(f,buf,50);
-  if (strcmp(buf,"CMapWorld") != 0) throw new GeoException("Expected CMapWorld");
+  if (strcmp(buf,"CMapWorld") != 0) throw new GeoException((char *)"Expected CMapWorld");
 
   RMFPosGroup = 0;
   RMFReadGroup(f,this);
 
   RMFReadEntityDef(f,&wsdef);
-  if (strcmp(wsdef.classname,"worldspawn") != 0) throw new GeoException("Root entity is not called \"worldspawn\"");
+  if (strcmp(wsdef.classname,"worldspawn") != 0) throw new GeoException((char *)"Root entity is not called \"worldspawn\"");
 
   RMFSkip(f,12);
   RMFReadInt(f,&npaths);
@@ -581,7 +581,7 @@ void GeoMap::RMFWriteEntity(FILE *f, GeoEntity *entity)
 
   for (isolid = entity->solids.begin(); isolid != entity->solids.end(); isolid++)
   {
-    RMFWriteNString(f,"CMapSolid");
+    RMFWriteNString(f,(char *)"CMapSolid");
     RMFWriteSolid(f,&*isolid);
   }
 
@@ -602,19 +602,19 @@ void GeoMap::RMFWriteGroup(FILE *f, GeoGroup *group)
 
   for (ientity = group->entities.begin(); ientity != group->entities.end(); ientity++)
   {
-    RMFWriteNString(f,"CMapEntity");
+    RMFWriteNString(f,(char *)"CMapEntity");
     RMFWriteEntity(f,&*ientity);
   }
 
   for (isolid = group->solids.begin(); isolid != group->solids.end(); isolid++)
   {
-    RMFWriteNString(f,"CMapSolid");
+    RMFWriteNString(f,(char *)"CMapSolid");
     RMFWriteSolid(f,&*isolid);
   }
 
   for (igroup = group->groups.begin(); igroup != group->groups.end(); igroup++)
   {
-    RMFWriteNString(f,"CMapGroup");
+    RMFWriteNString(f,(char *)"CMapGroup");
     RMFWriteGroup(f,&*igroup);
   }
 }
@@ -660,13 +660,13 @@ void GeoMap::RMFWrite(FILE *f)
   list<GeoVisGroup>::iterator ivg;
   list<GeoPath>::iterator ipath;
 
-  RMFWriteString(f,"\xCD\xCC\x0C\x40\x52\x4D\x46",7);
+  RMFWriteString(f,(char *)"\xCD\xCC\x0C\x40\x52\x4D\x46",7);
   RMFWriteInt(f,visgroups.size());
 
   for (ivg = visgroups.begin(); ivg != visgroups.end(); ivg++)
     RMFWriteVisGroup(f,&*ivg);
 
-  RMFWriteNString(f,"CMapWorld");
+  RMFWriteNString(f,(char *)"CMapWorld");
   RMFWriteGroup(f,this);
   RMFWriteEntityDef(f,&wsdef);
   RMFFill(f,12);
