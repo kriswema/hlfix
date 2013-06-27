@@ -22,8 +22,7 @@ all: $(OBJECTS)
 clean:
 	@rm -fRv $(OBJECTS)
 
-purge:
-	@make clean
+purge: clean
 	@rm -fRv $(BINARIES_DIR)
 
 install:
