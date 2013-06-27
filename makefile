@@ -27,4 +27,4 @@ purge:
 	@rm -fRv $(BINARIES_DIR)
 
 install:
-	mv $(BINARIES_DIR)* $(GLOBAL_BINARIES_DIR)
+	cp $(BINARIES_DIR)* $(GLOBAL_BINARIES_DIR)
